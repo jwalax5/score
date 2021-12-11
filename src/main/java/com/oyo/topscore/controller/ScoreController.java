@@ -43,9 +43,9 @@ public class ScoreController {
             Score data = scoreService.getScoreById(id);
             response = ApiResponseHandler.generateSuccessResponse("Get score successfully", HttpStatus.OK, data);
         } catch (ApiException ex) {
-            response = ApiResponseHandler.generateSuccessResponse(ex.getMessage(), HttpStatus.NOT_FOUND, null);
+            response = ApiResponseHandler.generateFailureResponse(ex.getMessage(), HttpStatus.NOT_FOUND, null);
         } catch (Exception ex) {
-            response = ApiResponseHandler.generateSuccessResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            response = ApiResponseHandler.generateFailureResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
         return response;
     }
@@ -66,7 +66,7 @@ public class ScoreController {
             scoreService.saveScore(score);
             response = ApiResponseHandler.generateSuccessResponse("Score has been created successfully", HttpStatus.OK, score.getId());
         } catch (Exception ex) {
-            response = ApiResponseHandler.generateSuccessResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            response = ApiResponseHandler.generateFailureResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
         return response;
     }
@@ -78,9 +78,9 @@ public class ScoreController {
             scoreService.deleteScoreById(id);
             response = ApiResponseHandler.generateSuccessResponse("Score has been deleted successfully", HttpStatus.OK, id);
         } catch (ApiException ex) {
-            response = ApiResponseHandler.generateSuccessResponse(ex.getMessage(), HttpStatus.NOT_FOUND, null);
+            response = ApiResponseHandler.generateFailureResponse(ex.getMessage(), HttpStatus.NOT_FOUND, null);
         } catch (Exception ex) {
-            response = ApiResponseHandler.generateSuccessResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            response = ApiResponseHandler.generateFailureResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
         return response;
     }
@@ -92,9 +92,9 @@ public class ScoreController {
             List<PlayerScore> data = scoreService.getPlayerScoreList(player);
             response = ApiResponseHandler.generateSuccessResponse("Get player score list successfully", HttpStatus.OK, data);
         } catch (ApiException ex) {
-            response = ApiResponseHandler.generateSuccessResponse(ex.getMessage(), HttpStatus.NOT_FOUND, null);
+            response = ApiResponseHandler.generateFailureResponse(ex.getMessage(), HttpStatus.NOT_FOUND, null);
         } catch (Exception ex) {
-            response = ApiResponseHandler.generateSuccessResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            response = ApiResponseHandler.generateFailureResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
         return response;
     }
@@ -106,9 +106,9 @@ public class ScoreController {
             PlayerScore data = scoreService.getPlayerTopScore(player);
             response = ApiResponseHandler.generateSuccessResponse("Get player top score successfully", HttpStatus.OK, data);
         } catch (ApiException ex) {
-            response = ApiResponseHandler.generateSuccessResponse(ex.getMessage(), HttpStatus.NOT_FOUND, null);
+            response = ApiResponseHandler.generateFailureResponse(ex.getMessage(), HttpStatus.NOT_FOUND, null);
         } catch (Exception ex) {
-            response = ApiResponseHandler.generateSuccessResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            response = ApiResponseHandler.generateFailureResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
         return response;
     }
@@ -120,9 +120,9 @@ public class ScoreController {
             PlayerScore data = scoreService.getPlayerLowestScore(player);
             response = ApiResponseHandler.generateSuccessResponse("Get player lowest score successfully", HttpStatus.OK, data);
         } catch (ApiException ex) {
-            response = ApiResponseHandler.generateSuccessResponse(ex.getMessage(), HttpStatus.NOT_FOUND, null);
+            response = ApiResponseHandler.generateFailureResponse(ex.getMessage(), HttpStatus.NOT_FOUND, null);
         } catch (Exception ex) {
-            response = ApiResponseHandler.generateSuccessResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            response = ApiResponseHandler.generateFailureResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
         return response;
     }
@@ -134,9 +134,9 @@ public class ScoreController {
             Integer data = scoreService.getPlayerAverageScore(player);
             response = ApiResponseHandler.generateSuccessResponse("Get player average score successfully", HttpStatus.OK, data);
         } catch (ApiException ex) {
-            response = ApiResponseHandler.generateSuccessResponse(ex.getMessage(), HttpStatus.NOT_FOUND, null);
+            response = ApiResponseHandler.generateFailureResponse(ex.getMessage(), HttpStatus.NOT_FOUND, null);
         } catch (Exception ex) {
-            response = ApiResponseHandler.generateSuccessResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            response = ApiResponseHandler.generateFailureResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
         return response;
     }
