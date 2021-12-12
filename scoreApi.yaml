@@ -258,4 +258,3 @@ definitions:
         type: "object"
       message:
         type: "string"
-        type: "string"
