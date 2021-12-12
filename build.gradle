@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.5.2'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'org.unbroken-dome.test-sets' version '4.0.0'
 }
 
 group = 'com.oyo'
@@ -11,6 +12,16 @@ sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
+}
+
+testing {
+	suites{
+		integrationTest(JvmTestSuite){
+			dependencies {
+				implementation project
+			}
+		}
+	}
 }
 
 dependencies {
@@ -24,7 +35,9 @@ dependencies {
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
 	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.hamcrest:hamcrest-all:1.3'
+	integrationTestImplementation 'org.springframework.boot:spring-boot-starter-test'
+	integrationTestImplementation 'org.hamcrest:hamcrest-all:1.3'
+	integrationTestImplementation 'org.springframework.boot:spring-boot-starter-web'
 	annotationProcessor 'org.projectlombok:lombok:1.18.22'
 }
 
@@ -32,6 +45,10 @@ test {
 	useJUnitPlatform()
 }
 
-task integrationTest(){
+testSets {
+	integrationTest
+}
 
+tasks.named('check') {
+	dependsOn testing.suites.integrationTest
 }
