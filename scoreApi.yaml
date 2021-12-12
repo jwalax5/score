@@ -1,0 +1,261 @@
+swagger: "2.0"
+info:
+  description: "This is a sample for Score API"
+  version: "1.0.0"
+  title: "Score API"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8080"
+basePath: "/api"
+tags:
+  - name: "Score"
+    description: "Score of player"
+
+schemes:
+  - "http"
+paths:
+  /scores/{id}:
+    get:
+      tags:
+        - "score"
+      summary: "Get score for given id"
+      description: ""
+      operationId: "getScore"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of score to return"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Score"
+    delete:
+      tags:
+        - "score"
+      summary: "Delete an existing score"
+      description: ""
+      operationId: "deleteScore"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of score to return"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "Score has been deleted successfully"
+        "404":
+          description: "Score id not found"
+  /scores:
+    get:
+      tags:
+        - "score"
+      summary: "Get score list"
+      description: "Get score list which can be filtered by different query string"
+      operationId: "getScoreList"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "player"
+          in: "query"
+          description: "Player can be provided with comma separated strings"
+          required: false
+          type: "string"
+        - name: "after"
+          in: "query"
+          description: "after"
+          required: false
+          type: "string"
+        - name: "before"
+          in: "query"
+          description: "before"
+          required: false
+          type: "string"
+        - name: "pageSize"
+          in: "query"
+          description: "pageSize"
+          required: false
+          type: "string"
+          format: "int64"
+        - name: "pageNo"
+          in: "query"
+          description: "pageNo"
+          required: false
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Score"
+    put:
+      tags:
+        - "score"
+      summary: "Create score"
+      description: ""
+      operationId: "putScore"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "score record"
+          required: true
+          schema:
+            $ref: "#/definitions/Score"
+      responses:
+        "200":
+          description: "Score has been created successfull"
+        "400":
+          description: "Score must be greater than 0"
+  /scores/{player}/list:
+    get:
+      tags:
+        - "player"
+      summary: "Find player score list"
+      description: "player score list"
+      operationId: "getScoreListOfPlayer"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "player"
+          in: "path"
+          description: "player name"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PlayerScoreList"
+        "404":
+          description: "Player not found"
+  /scores/{player}/top:
+    get:
+      tags:
+        - "player"
+      summary: "Find player top score"
+      description: "player top score"
+      operationId: "getTopScoreOfPlayer"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "player"
+          in: "path"
+          description: "player name"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PlayerScore"
+        "404":
+          description: "Player not found"
+  /scores/{player}/lowest:
+    get:
+      tags:
+        - "player"
+      summary: "Find player lowest score"
+      description: "player lowest score"
+      operationId: "getLowestScoreOfPlayer"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "player"
+          in: "path"
+          description: "player name"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PlayerScore"
+        "404":
+          description: "Player not found"
+  /scores/{player}/avg:
+    get:
+      tags:
+        - "player"
+      summary: "Find player average score"
+      description: "player average score"
+      operationId: "getAverageScoreOfPlayer"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "player"
+          in: "path"
+          description: "player name"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PlayerScore"
+        "404":
+          description: "Player not found"
+definitions:
+  PlayerScoreList:
+    type: "array"
+    items:
+      $ref: "#/definitions/PlayerScore"
+  Score:
+    type: "object"
+    properties:
+      player:
+        type: "string"
+      score:
+        type: "integer"
+        format: "int64"
+      time:
+        type: "string"
+        format: "date-time"
+  PlayerScore:
+    type: "object"
+    properties:
+      score:
+        type: "integer"
+        format: "int64"
+      time:
+        type: "string"
+        format: "date-time"
+  SuccessApiResponse:
+    type: "object"
+    properties:
+      status:
+        type: "integer"
+        format: "int32"
+      result:
+        type: "object"
+      message:
+        type: "string"
+  FailuerApiResponse:
+    type: "object"
+    properties:
+      status:
+        type: "integer"
+        format: "int32"
+      error:
+        type: "object"
+      message:
+        type: "string"
+        type: "string"
