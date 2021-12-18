@@ -1,5 +1,5 @@
-## How to run the project in local:
-First clone the git 
+### Run the project in local:
+Clone the git repository
 ```
 git clone https://github.com/jwalax5/score.git
 ```
@@ -24,7 +24,7 @@ curl localhost:8080/api
 If you see "Hello, World", that's mean the application has been started.
 
 
-## How to run Unit Test:
+### Run Unit Test:
 ```
 ./gradlew clean test
 ```
@@ -32,16 +32,16 @@ If you see "Hello, World", that's mean the application has been started.
 You can view the test result from
 : /build/reports/tests/test/index.html 
 
-## How to run Integration Test:
+### Run Integration Test:
 ```
 ./gradlew clean iT
 ```
 
-API docs (using swagger) : 
-- Please go to https://editor.swagger.io
-- Paste the scoreApi.yaml content into the page
+### Run in docker
+```
+docker build -t docker-sb .
+```
 
-Manual API Test (Using postman) : 
-- Please import the postman collection json
-- There should be 8 api in total
-- Usage can be reference from yaml
+```
+docker run -p 8080:8080 docker-sb
+```
