@@ -39,9 +39,17 @@ You can view the test result from
 
 ### Run in docker
 ```
-docker build -t docker-sb .
+docker build -t docker-sb:1.0 .
 ```
-
+first time run image in container
 ```
-docker run -p 8080:8080 docker-sb
+docker run -p 8080:8080 --name topscore docker-sb:1.0
+```
+stop container
+```
+docker stop topscore / ctrl + c
+```
+start application after first time
+```
+docker start topscore
 ```
